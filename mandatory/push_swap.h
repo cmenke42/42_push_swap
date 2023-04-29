@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 16:39:39 by cmenke            #+#    #+#             */
-/*   Updated: 2023/04/29 21:59:33 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/04/29 22:13:38 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,20 @@ int		ft_number_of_nodes(t_stk *lst);
 void	ft_print_stk_a(t_stk *stk_a, t_stk *stk_b);
 void	ft_print_op(char *operation);
 void	ft_error_exit(int error_code);
+// swap.c
+void	ft_ss(t_stk **stk_a, t_stk **stk_b);
+void	ft_sa(t_stk **stk_a, bool print);
+void	ft_sb(t_stk **stk_b, bool print);
+// push.c
+void	ft_pa(t_vars *vars, t_stk **stk_a, t_stk **stk_b);
+void	ft_pb(t_vars *vars, t_stk **stk_a, t_stk **stk_b);
+// rotate.c
+void	ft_rr(t_stk **stk_a, t_stk **stk_b);
+void	ft_ra(t_stk **stk_a, bool print);
+void	ft_rb(t_stk **stk_b, bool print);
+// reverse_rotate.c
+void	ft_rrr(t_stk **stk_a, t_stk **stk_b);
+void	ft_rra(t_stk **stk_a, bool print);
+void	ft_rrb(t_stk **stk_b, bool print);
 
 #endif

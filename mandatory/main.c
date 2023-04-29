@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 18:52:48 by cmenke            #+#    #+#             */
-/*   Updated: 2023/04/29 22:04:21 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/04/29 22:50:35 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ int	ft_error(int exit_code)
 	return (exit_code);
 }
 
+//////
+/// check and parse the input -- START
+///////
 bool	ft_check_if_stk_a_is_unsorted(t_stk *stk_a)
 {
 	while (stk_a && stk_a->next)
@@ -69,6 +72,7 @@ bool	ft_add_num_to_stk_a_if_not_duplicate(t_stk **stk_a, long int num)
 		temp->next = new;
 	else
 		*stk_a = new;
+	return (true);
 }
 
 bool	ft_put_numbers_to_stk_a(t_vars *vars, t_stk **stk_a)
@@ -83,11 +87,9 @@ bool	ft_put_numbers_to_stk_a(t_vars *vars, t_stk **stk_a)
 			return (false);
 		vars->start_pos++;
 	}
+	return (true);
 }
 
-////
-///read input
-////
 bool	ft_split_input(t_vars *vars, char **argv, int argc)
 {
 	if (argc == 2)
@@ -105,9 +107,39 @@ bool	ft_split_input(t_vars *vars, char **argv, int argc)
 	return (true);
 }
 
-/////
-///end read input
-/////
+//////
+/// check and parse the input -- END
+///////
+
+//////
+/// sorting the numbers - START
+///////
+
+/// 3 numbers in stack a - START
+
+void	ft_sort_three_nums_stk_a(t_vars *vars, t_stk **stk_a)
+{
+	int	first;
+	int	second;
+	int	third;
+
+	first = (*stk_a)->number;
+	second = (*stk_a)->next->number;
+	third = (*stk_a)->next->next->number;
+	if (first > second && first > third)
+		ft_ra(stk_a, true);
+	else if (first < second && second > third)
+		ft_rra(stk_a, true);
+	if ((*stk_a)->number > (*stk_a)->next->number)
+		ft_sa(stk_a, true);
+}
+
+///3 numbers in stack a - END
+
+//////
+/// sorting the numbers -- END
+///////
+
 
 int	main(int argc, char **argv)
 {
@@ -118,7 +150,7 @@ int	main(int argc, char **argv)
 	stk_a = NULL;
 	stk_b = NULL;
 	if (argc < 2)
-		return (ft_error(1));
+		return (0);
 	vars = ft_calloc(1, sizeof(t_vars));
 	if (!vars)
 		return (ft_error(1));
@@ -128,8 +160,14 @@ int	main(int argc, char **argv)
 		return (ft_error(1));
 	if (ft_check_if_stk_a_is_unsorted(stk_a) == false)
 		return (0);
+	vars->len_stk_a = ft_number_of_nodes(stk_a);
+	if (vars->len_stk_a == 2)
+		ft_sa(&stk_a, true);
+	if (vars->len_stk_a == 3)
+		ft_sort_three_nums_stk_a(vars, &stk_a);
+	ft_printf("num nodes:%d\n", vars->len_stk_a);
 	ft_print_stk_a(stk_a, stk_b);
 	if (stk_a)
 		ft_clear_all_nodes(&stk_a);
-	// ft_printf("%s\n", argv[0]);
+	return (0);
 }
