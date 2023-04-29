@@ -6,7 +6,7 @@
 #    By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/13 09:41:00 by cmenke            #+#    #+#              #
-#    Updated: 2023/04/29 18:59:41 by cmenke           ###   ########.fr        #
+#    Updated: 2023/04/29 19:14:04 by cmenke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ SRC := ft_isalpha.c \
 	ft_memchr.c \
 	ft_memcmp.c \
 	ft_strnstr.c \
-	ft_atoi.c \
+	ft_atol.c \
 	ft_calloc.c \
 	ft_strdup.c \
 	ft_substr.c \

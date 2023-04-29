@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 20:13:09 by cmenke            #+#    #+#             */
-/*   Updated: 2022/12/30 12:48:08 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/04/29 19:13:49 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 //searches for isspace(3) then for signs (one only),
 //then numbers. if no number is found in pattern returns 0.
-//else returns the found integer.
-int	ft_atoi(const char *str)
+//else returns the found long integer.
+long int	ft_atol(const char *str)
 {
-	int	minus;
-	int	result;
+	long int	minus;
+	long int	result;
 
 	minus = 1;
 	result = 0;

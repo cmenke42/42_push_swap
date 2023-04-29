@@ -6,7 +6,7 @@
 #    By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/08 21:07:24 by cmenke            #+#    #+#              #
-#    Updated: 2023/04/29 19:01:33 by cmenke           ###   ########.fr        #
+#    Updated: 2023/04/29 19:42:03 by cmenke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ LIBFT := libft.a
 
 INCLUDE := ${LIBFTDIR}/${LIBFT}
 
-CFLAGS := -Wall -Werror -Wextra
+CFLAGS := -Wall -Wextra
+# CFLAGS := -Wall -Werror -Wextra
 
 CC := cc
 

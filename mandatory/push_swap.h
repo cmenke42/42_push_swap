@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 16:39:39 by cmenke            #+#    #+#             */
-/*   Updated: 2023/04/29 19:03:15 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/04/29 19:35:15 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,11 @@ typedef struct s_stk
 	unsigned int	new_index;
 	struct s_stk	*next;
 }					t_stk;
+
+typedef struct s_vars
+{
+	t_stk	*stk_a;
+	t_stk	*stk_b;
+}					t_vars;
 
 #endif
