@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 16:39:39 by cmenke            #+#    #+#             */
-/*   Updated: 2023/04/29 21:31:29 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/04/29 21:59:33 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct s_vars
 {
 	char		**numbers;
 	long int	start_pos;
+	long int	len_stk_a;
+	long int	len_stk_b;
 }					t_vars;
 
 //create_nodes_1

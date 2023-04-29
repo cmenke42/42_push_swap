@@ -6,7 +6,7 @@
 #    By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/08 21:07:24 by cmenke            #+#    #+#              #
-#    Updated: 2023/04/29 20:57:39 by cmenke           ###   ########.fr        #
+#    Updated: 2023/04/29 21:58:27 by cmenke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,11 @@ SRCDIR := mandatory
 SRCS := $(addprefix ${SRCDIR}/,main.c \
 							create_nodes_1.c \
 							create_nodes_2.c \
-							helper_functions.c)
+							helper_functions.c \
+							push.c \
+							reverse_rotate.c \
+							rotate.c \
+							swap.c)
 
 # BSCRDIR := bonus
 
