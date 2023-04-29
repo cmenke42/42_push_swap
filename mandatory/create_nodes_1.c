@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 22:04:00 by cmenke            #+#    #+#             */
-/*   Updated: 2023/04/29 22:04:02 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/04/29 23:20:05 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_stk	*ft_new_node(int number)
 	if (new == NULL)
 		return (NULL);
 	new->number = number;
+	new->future_index = 0;
 	new->next = NULL;
 	return (new);
 }

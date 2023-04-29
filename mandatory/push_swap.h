@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 16:39:39 by cmenke            #+#    #+#             */
-/*   Updated: 2023/04/29 22:13:38 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/04/29 23:19:57 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,16 @@
 typedef struct s_stk
 {
 	int				number;
+	unsigned int	future_index;
 	struct s_stk	*next;
 }					t_stk;
 
 typedef struct s_vars
 {
-	char		**numbers;
-	long int	start_pos;
-	long int	len_stk_a;
-	long int	len_stk_b;
+	char			**numbers;
+	unsigned int	start_pos;
+	unsigned int	len_stk_a;
+	unsigned int	len_stk_b;
 }					t_vars;
 
 //create_nodes_1

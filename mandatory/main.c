@@ -6,11 +6,20 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 18:52:48 by cmenke            #+#    #+#             */
-/*   Updated: 2023/04/29 22:50:35 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/04/30 00:46:01 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
+//delete
+#include <stdio.h>
+
+
+
+
+
 #include "push_swap.h"
+
 
 int	ft_error(int exit_code)
 {
@@ -117,7 +126,7 @@ bool	ft_split_input(t_vars *vars, char **argv, int argc)
 
 /// 3 numbers in stack a - START
 
-void	ft_sort_three_nums_stk_a(t_vars *vars, t_stk **stk_a)
+void	ft_sort_three_nums_stk_a(t_stk **stk_a)
 {
 	int	first;
 	int	second;
@@ -132,6 +141,54 @@ void	ft_sort_three_nums_stk_a(t_vars *vars, t_stk **stk_a)
 		ft_rra(stk_a, true);
 	if ((*stk_a)->number > (*stk_a)->next->number)
 		ft_sa(stk_a, true);
+}
+
+void	ft_calc_first_diff(int min_num, t_stk *stk_a, long int *min_diff)
+{
+	while (stk_a)
+	{
+		if (stk_a->future_index == 0)
+			*min_diff = ((long int)min_num - stk_a->number) * -1;
+		stk_a = stk_a->next;
+	}	
+}
+
+t_stk	*ft_find_next_closest_num(t_stk *stk_a, long int min_diff, int min_num)
+{
+	long int		diff;
+	t_stk			*assign_index;
+
+	while (stk_a)
+	{
+		if (stk_a->future_index == 0)
+			diff = ((long int)min_num - stk_a->number) * -1;
+		if (stk_a->future_index == 0 && diff <= min_diff)
+		{
+			min_diff = diff;
+			assign_index = stk_a;
+		}
+		stk_a = stk_a->next;
+	}
+	return (assign_index);
+}
+
+void	ft_assign_future_index(t_vars *vars, t_stk *stk_a, t_stk *start)
+{
+	unsigned int	index;
+	int				min_num;
+	long int		min_diff;
+	t_stk			*assign_index;
+	
+	index = 1;
+	min_num = INT_MIN;
+	while (index <= vars->len_stk_a)
+	{
+		ft_calc_first_diff(min_num, stk_a, &min_diff);
+		assign_index = ft_find_next_closest_num(stk_a, min_diff, min_num);
+		assign_index->future_index = index++;
+		min_num = assign_index->number;
+		stk_a = start;
+	}
 }
 
 ///3 numbers in stack a - END
@@ -164,7 +221,8 @@ int	main(int argc, char **argv)
 	if (vars->len_stk_a == 2)
 		ft_sa(&stk_a, true);
 	if (vars->len_stk_a == 3)
-		ft_sort_three_nums_stk_a(vars, &stk_a);
+		ft_sort_three_nums_stk_a(&stk_a);
+	ft_assign_future_index(vars, stk_a, stk_a);
 	ft_printf("num nodes:%d\n", vars->len_stk_a);
 	ft_print_stk_a(stk_a, stk_b);
 	if (stk_a)
