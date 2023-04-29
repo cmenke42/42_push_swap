@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 16:39:39 by cmenke            #+#    #+#             */
-/*   Updated: 2023/04/29 19:35:15 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/04/29 21:31:29 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,27 @@
 typedef struct s_stk
 {
 	int				number;
-	unsigned int	new_index;
 	struct s_stk	*next;
 }					t_stk;
 
 typedef struct s_vars
 {
-	t_stk	*stk_a;
-	t_stk	*stk_b;
+	char		**numbers;
+	long int	start_pos;
 }					t_vars;
+
+//create_nodes_1
+t_stk	*ft_new_node(int number);
+void	ft_node_add_back(t_stk **lst, t_stk *new);
+void	ft_node_add_front(t_stk **lst, t_stk *new);
+//create_nodes_2
+t_stk	*ft_last_node(t_stk *lst);
+t_stk	*ft_second_last_node(t_stk *lst);
+void	ft_clear_all_nodes(t_stk **lst);
+int		ft_number_of_nodes(t_stk *lst);
+//helper_functions
+void	ft_print_stk_a(t_stk *stk_a, t_stk *stk_b);
+void	ft_print_op(char *operation);
+void	ft_error_exit(int error_code);
 
 #endif

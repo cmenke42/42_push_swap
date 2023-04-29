@@ -6,7 +6,7 @@
 #    By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/08 21:07:24 by cmenke            #+#    #+#              #
-#    Updated: 2023/04/29 19:42:03 by cmenke           ###   ########.fr        #
+#    Updated: 2023/04/29 20:57:39 by cmenke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,10 @@ NAME := push_swap
 
 SRCDIR := mandatory
 
-SRCS := $(addprefix ${SRCDIR}/,main.c)
+SRCS := $(addprefix ${SRCDIR}/,main.c \
+							create_nodes_1.c \
+							create_nodes_2.c \
+							helper_functions.c)
 
 # BSCRDIR := bonus
 
