@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 18:52:48 by cmenke            #+#    #+#             */
-/*   Updated: 2023/04/29 21:40:29 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/04/29 21:42:12 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,5 +129,7 @@ int	main(int argc, char **argv)
 	if (ft_check_if_stk_a_is_unsorted(stk_a) == false)
 		return (ft_error(1));
 	ft_print_stk_a(stk_a, stk_b);
+	if (stk_a)
+		ft_clear_all_nodes(&stk_a);
 	// ft_printf("%s\n", argv[0]);
 }
