@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 16:39:39 by cmenke            #+#    #+#             */
-/*   Updated: 2023/04/29 23:19:57 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/04/30 01:59:14 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,15 @@ typedef struct s_vars
 	unsigned int	start_pos;
 	unsigned int	len_stk_a;
 	unsigned int	len_stk_b;
+	unsigned int	median;
+	unsigned int	amt_ra;
+	unsigned int	amt_rb;
+	unsigned int	amt_rra;
+	unsigned int	amt_rrb;
+	unsigned int	min_amt_ra;
+	unsigned int	min_amt_rb;
+	unsigned int	min_amt_rra;
+	unsigned int	min_amt_rrb;
 }					t_vars;
 
 //create_nodes_1
@@ -49,6 +58,7 @@ void	ft_clear_all_nodes(t_stk **lst);
 int		ft_number_of_nodes(t_stk *lst);
 //helper_functions
 void	ft_print_stk_a(t_stk *stk_a, t_stk *stk_b);
+void	ft_print_stk_a_future(t_stk *stk_a, t_stk *stk_b);
 void	ft_print_op(char *operation);
 void	ft_error_exit(int error_code);
 // swap.c
