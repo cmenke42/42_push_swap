@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 18:52:48 by cmenke            #+#    #+#             */
-/*   Updated: 2023/04/30 16:07:41 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/04/30 18:29:00 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ void	ft_assign_future_index(t_vars *vars, t_stk *stk_a)
 	
 	index = 0;
 	min_num = INT_MIN;
-	while (index <= vars->len_stk_a)
+	while (index < vars->len_stk_a)
 	{
 		ft_calc_first_diff(min_num, stk_a, &min_diff);
 		assign_index = ft_find_next_closest_num(stk_a, min_diff, min_num);
@@ -217,6 +217,12 @@ bool	ft_find_number_below_median(t_vars *vars, t_stk **stk_a)
 	return (result);
 }
 
+void	ft_get_max_values_stk_a(t_vars *vars, t_stk *stk_a)
+{
+	vars->min_stk_a = stk_a->future_index;
+	vars->max_stk_a = stk_a->next->next->future_index;
+}
+
 //optimize with the direction of turning ra or rra - maybe??
 void	ft_push_all_to_stk_b(t_vars *vars, t_stk **stk_a, t_stk **stk_b)
 {
@@ -225,7 +231,6 @@ void	ft_push_all_to_stk_b(t_vars *vars, t_stk **stk_a, t_stk **stk_b)
 	search = true;
 	while (vars->len_stk_a > 3)
 	{
-		ft_print_stk_a_future(*stk_a, *stk_b);
 		if ((*stk_a)->future_index < vars->median)
 			ft_pb(vars, stk_a, stk_b);
 		else if (search == true)
@@ -235,6 +240,7 @@ void	ft_push_all_to_stk_b(t_vars *vars, t_stk **stk_a, t_stk **stk_b)
 	}
 	if (vars->len_stk_a == 3)
 		ft_sort_three_nums_stk_a(stk_a);
+	ft_get_max_values_stk_a(vars, *stk_a);
 }
 
 void	ft_reset_operation_counter(t_vars *vars)
@@ -300,40 +306,52 @@ void	ft_do_reverse_rotate_op(t_vars *vars, t_stk **stk_a, t_stk **stk_b)
 	}
 }
 
+void	ft_calc_op_for_min_o_max(t_vars *vars, t_stk **stk_a)
+{
+	unsigned int	counter;
+	t_stk			*temp;
+
+	counter = 0;
+	temp = *stk_a;
+	while (temp->future_index != vars->min_stk_a)
+	{
+		counter++;
+		temp = temp->next;
+	}
+	// printf("ziel Zahl: %u\n", temp->future_index);
+	// printf("counter: %u\n", counter);
+	// printf("len_a: %u\n", vars->len_stk_a);
+	if (counter < vars->len_stk_a - counter)
+		vars->amt_ra = counter;
+	else if (counter != 0)
+		vars->amt_rra = vars->len_stk_a - counter;
+}
+
 void	ft_find_spot_in_a(t_vars *vars, t_stk *stk_a, unsigned int index, t_stk **_a)
 {
 	unsigned int	counter;
 
 	counter = 0;
-	if (index < stk_a->future_index)
+	// printf("a_min:%u --- a_max:%u\n", vars->min_stk_a, vars->max_stk_a);
+	// printf("betrachtete Zahl: %u\n", index);
+	if (index < vars->min_stk_a || index > vars->max_stk_a)
+		ft_calc_op_for_min_o_max(vars, _a);
+	else if (index < stk_a->future_index && index > ft_last_node(stk_a)->future_index)
 		return ;
-	while (stk_a->next)
-	{	
-		counter++;
-		if (index > stk_a->future_index && index < stk_a->next->future_index)
-			break;
-		stk_a = stk_a->next;
-	}
-	if (counter < vars->len_stk_a - counter)
-	{
-		while (counter)
-		{
-			ft_ra(_a, true);
-			counter--;
-		}
-	}
 	else
 	{
-		while (vars->len_stk_a - counter)
-		{
-			ft_rra(_a, true);
+		while (stk_a->next)
+		{	
 			counter++;
+			if (index > stk_a->future_index && index < stk_a->next->future_index)
+				break;
+			stk_a = stk_a->next;
 		}
+		if (counter < vars->len_stk_a - counter)
+			vars->amt_ra = counter;
+		else
+			vars->amt_rra = vars->len_stk_a - counter;
 	}
-	// if (counter < vars->len_stk_a - counter)
-	// 	vars->amt_ra = counter;
-	// else 
-	// 	vars->amt_rra = vars->len_stk_a - counter;
 }
 // long int	ft_calc_movement_cost(t_vars *vars)
 // {
@@ -374,30 +392,49 @@ void	ft_sort_from_b_to_a(t_vars *vars, t_stk **stk_a, t_stk **stk_b)
 
 	while (vars->len_stk_b > 0)
 	{
-		temp_b = *stk_b;
-		// counter = 0;
-		// ft_find_spot_in_a(vars, *stk_a, temp_b->future_index);
-		// ft_save_min_op_counter(vars);
-		while (temp_b)
-		{	
-			ft_find_spot_in_a(vars, *stk_a, temp_b->future_index, stk_a);
-			// if (counter < vars->len_stk_b - counter)
-			// 	vars->amt_rb = counter;
-			// else 
-			// 	vars->amt_rrb = vars->len_stk_b - counter;
-			// if (vars->amt_ra + vars->amt_rb + vars->amt_rra + vars->amt_rrb < vars->min_amt_ra + vars->min_amt_rb + vars->min_amt_rra + vars->min_amt_rrb)
-			// 	ft_save_min_op_counter(vars);
-			// ft_reset_operation_counter(vars);
-			// counter++;
-			temp_b = temp_b->next;
-			ft_print_stk_a_future(*stk_a, *stk_b);
-			ft_pa(vars, stk_a, stk_b);
-		}
-		// ft_do_reverse_rotate_op(vars, stk_a, stk_b);
-		// ft_do_rotate_op(vars, stk_a, stk_b);
-		// ft_pa(vars, stk_a, stk_b);
+		// ft_print_stk_a_future(*stk_a, *stk_b);
+		ft_reset_operation_counter(vars);
+		ft_find_spot_in_a(vars, *stk_a, (*stk_b)->future_index, stk_a);
+		ft_save_min_op_counter(vars);
+		ft_do_reverse_rotate_op(vars, stk_a, stk_b);
+		ft_do_rotate_op(vars, stk_a, stk_b);
+		ft_pa(vars, stk_a, stk_b);
 	}
+	///check wich one is cheaper
+	while ((*stk_a)->future_index != 1)
+		ft_ra(stk_a, true);
 }
+// void	ft_sort_from_b_to_a(t_vars *vars, t_stk **stk_a, t_stk **stk_b)
+// {
+// 	unsigned int	counter;
+// 	t_stk			*temp_b;
+
+// 	while (vars->len_stk_b > 0)
+// 	{
+// 		temp_b = *stk_b;
+// 		// counter = 0;
+// 		// ft_find_spot_in_a(vars, *stk_a, temp_b->future_index);
+// 		// ft_save_min_op_counter(vars);
+// 		while (temp_b)
+// 		{	
+// 			ft_find_spot_in_a(vars, *stk_a, temp_b->future_index, stk_a);
+// 			// if (counter < vars->len_stk_b - counter)
+// 			// 	vars->amt_rb = counter;
+// 			// else 
+// 			// 	vars->amt_rrb = vars->len_stk_b - counter;
+// 			// if (vars->amt_ra + vars->amt_rb + vars->amt_rra + vars->amt_rrb < vars->min_amt_ra + vars->min_amt_rb + vars->min_amt_rra + vars->min_amt_rrb)
+// 			// 	ft_save_min_op_counter(vars);
+// 			// ft_reset_operation_counter(vars);
+// 			// counter++;
+// 			temp_b = temp_b->next;
+// 			ft_print_stk_a_future(*stk_a, *stk_b);
+// 			ft_pa(vars, stk_a, stk_b);
+// 		}
+// 		// ft_do_reverse_rotate_op(vars, stk_a, stk_b);
+// 		// ft_do_rotate_op(vars, stk_a, stk_b);
+// 		// ft_pa(vars, stk_a, stk_b);
+// 	}
+// }
 
 //////
 /// sorting the numbers -- END
@@ -429,11 +466,15 @@ int	main(int argc, char **argv)
 	if (vars->len_stk_a == 3)
 		ft_sort_three_nums_stk_a(&stk_a);
 	ft_assign_future_index(vars, stk_a);
-	ft_print_stk_a_future(stk_a, stk_b);
+
+	////sorting of there are more than 3 numbers
+	// ft_print_stk_a_future(stk_a, stk_b);
 	ft_push_all_to_stk_b(vars, &stk_a, &stk_b);
-	ft_printf("num nodes:%d\n", vars->len_stk_a);
-	// ft_sort_from_b_to_a(vars, &stk_a, &stk_b);
-	ft_print_stk_a_future(stk_a, stk_b);
+	// ft_print_stk_a_future(stk_a, stk_b);
+	ft_sort_from_b_to_a(vars, &stk_a, &stk_b);
+	// ft_print_stk_a_future(stk_a, stk_b);
+
+	//make sure to free the nodes if a fial happens during allocation of the nodes
 	if (stk_a)
 		ft_clear_all_nodes(&stk_a);
 	return (0);

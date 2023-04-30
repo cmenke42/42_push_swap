@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 16:39:39 by cmenke            #+#    #+#             */
-/*   Updated: 2023/04/30 01:59:14 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/04/30 16:56:28 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ typedef struct s_vars
 	unsigned int	min_amt_rb;
 	unsigned int	min_amt_rra;
 	unsigned int	min_amt_rrb;
+	unsigned int	max_stk_a;
+	unsigned int	min_stk_a;
 }					t_vars;
 
 //create_nodes_1
