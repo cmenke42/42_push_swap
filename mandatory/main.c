@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 18:52:48 by cmenke            #+#    #+#             */
-/*   Updated: 2023/04/30 21:22:07 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/04/30 21:42:55 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,34 +287,12 @@ bool	ft_find_number_below_median(t_vars *vars, t_stk **stk_a)
 	return (result);
 }
 
-// bool	ft_find_number_below_median(t_vars *vars, t_stk **stk_a)
-// {
-// 	t_stk	*temp;
-// 	bool	result;
-
-// 	temp = *stk_a;
-// 	result = false;
-// 	while (temp)
-// 	{
-// 		if (temp->future_index < vars->median)
-// 		{
-// 			result = true;
-// 			break ;
-// 		}
-// 		temp = temp->next;
-// 	}
-// 	while (result == true && temp->future_index != (*stk_a)->future_index)
-// 		ft_ra(stk_a, true);
-// 	return (result);
-// }
-
 void	ft_get_max_values_stk_a(t_vars *vars, t_stk *stk_a)
 {
 	vars->min_stk_a = stk_a->future_index;
 	vars->max_stk_a = stk_a->next->next->future_index;
 }
 
-//optimize with the direction of turning ra or rra - maybe??
 void	ft_push_all_to_stk_b(t_vars *vars, t_stk **stk_a, t_stk **stk_b)
 {
 	bool			search;
@@ -440,16 +418,9 @@ void	ft_finish_up_stk_a(t_vars *vars, t_stk **stk_a)
 		vars->amt_ra = counter;
 	else
 		vars->amt_rra = vars->len_stk_a - counter;
-	while(vars->amt_ra)
-	{
-		ft_ra(stk_a, true);
-		vars->amt_ra--;
-	}
-	while(vars->amt_rra)
-	{
-		ft_rra(stk_a, true);
-		vars->amt_rra--;
-	}
+	ft_save_min_op_counter(vars);
+	ft_do_rotate_op(vars, stk_a, NULL);
+	ft_do_reverse_rotate_op(vars, stk_a, NULL);
 }
 
 void	ft_sort_from_b_to_a(t_vars *vars, t_stk **stk_a, t_stk **stk_b)
@@ -548,18 +519,23 @@ int	main(int argc, char **argv)
 	vars->len_stk_a = ft_number_of_nodes(stk_a);
 	if (vars->len_stk_a == 2)
 		ft_sa(&stk_a, true);
-	if (vars->len_stk_a == 3)
+	else if (vars->len_stk_a == 3)
 		ft_sort_three_nums_stk_a(&stk_a);
-	ft_assign_future_index(vars, stk_a);
-	////sorting of there are more than 3 numbers
-	// ft_print_stk_a_future(stk_a, stk_b);
-	ft_push_all_to_stk_b(vars, &stk_a, &stk_b);
-	// ft_print_stk_a_future(stk_a, stk_b);
-	ft_sort_from_b_to_a(vars, &stk_a, &stk_b);
-	// ft_print_stk_a_future(stk_a, stk_b);
+	else
+	{
+		ft_assign_future_index(vars, stk_a);
+		////sorting of there are more than 3 numbers
+		// ft_print_stk_a_future(stk_a, stk_b);
+		ft_push_all_to_stk_b(vars, &stk_a, &stk_b);
+		// ft_print_stk_a_future(stk_a, stk_b);
+		ft_sort_from_b_to_a(vars, &stk_a, &stk_b);
+		// ft_print_stk_a_future(stk_a, stk_b);
+	}
 
 	//make sure to free the nodes if a fial happens during allocation of the nodes
-	if (stk_a)
-		ft_clear_all_nodes(&stk_a);
+	if (argc == 2)
+		free(vars->numbers);
+	ft_clear_all_nodes(&stk_a);
+	free(vars);
 	return (0);
 }
