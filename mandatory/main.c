@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 18:52:48 by cmenke            #+#    #+#             */
-/*   Updated: 2023/04/30 02:20:48 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/04/30 16:07:41 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,17 +196,42 @@ void	ft_assign_future_index(t_vars *vars, t_stk *stk_a)
 
 /// assigning future indexes - END
 
+bool	ft_find_number_below_median(t_vars *vars, t_stk **stk_a)
+{
+	t_stk	*temp;
+	bool	result;
+
+	temp = *stk_a;
+	result = false;
+	while (temp)
+	{
+		if (temp->future_index < vars->median)
+		{
+			result = true;
+			break ;
+		}
+		temp = temp->next;
+	}
+	while (result == true && temp->future_index != (*stk_a)->future_index)
+		ft_ra(stk_a, true);
+	return (result);
+}
+
+//optimize with the direction of turning ra or rra - maybe??
 void	ft_push_all_to_stk_b(t_vars *vars, t_stk **stk_a, t_stk **stk_b)
 {
+	bool			search;
+
+	search = true;
 	while (vars->len_stk_a > 3)
 	{
-		if ((*stk_a)->future_index >= vars->median)
+		ft_print_stk_a_future(*stk_a, *stk_b);
+		if ((*stk_a)->future_index < vars->median)
 			ft_pb(vars, stk_a, stk_b);
+		else if (search == true)
+			search = ft_find_number_below_median(vars, stk_a);
 		else
-		{
 			ft_pb(vars, stk_a, stk_b);
-			ft_rb(stk_b, true);
-		}
 	}
 	if (vars->len_stk_a == 3)
 		ft_sort_three_nums_stk_a(stk_a);
@@ -407,7 +432,7 @@ int	main(int argc, char **argv)
 	ft_print_stk_a_future(stk_a, stk_b);
 	ft_push_all_to_stk_b(vars, &stk_a, &stk_b);
 	ft_printf("num nodes:%d\n", vars->len_stk_a);
-	ft_sort_from_b_to_a(vars, &stk_a, &stk_b);
+	// ft_sort_from_b_to_a(vars, &stk_a, &stk_b);
 	ft_print_stk_a_future(stk_a, stk_b);
 	if (stk_a)
 		ft_clear_all_nodes(&stk_a);
