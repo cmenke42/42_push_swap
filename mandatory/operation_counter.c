@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 21:13:25 by cmenke            #+#    #+#             */
-/*   Updated: 2023/05/01 21:13:48 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/01 21:30:56 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,12 @@ void	ft_save_min_op_counter(t_vars *vars)
 	vars->min_amt_rb = vars->amt_rb;
 	vars->min_amt_rra = vars->amt_rra;
 	vars->min_amt_rrb = vars->amt_rrb;
+}
+
+void	ft_set_rotate_counter_for_stack_a(t_vars *vars, long int counter)
+{
+	if (counter < vars->len_stk_a - counter)
+		vars->amt_ra = counter;
+	else
+		vars->amt_rra = vars->len_stk_a - counter;
 }
