@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:37:20 by cmenke            #+#    #+#             */
-/*   Updated: 2023/05/02 00:25:44 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/02 00:37:00 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ bool	ft_put_numbers_to_stk_a(t_vars *vars, t_stk **stk_a)
 	long int	counter;
 
 	counter = 0;
+	if (vars->numbers[0] == NULL)
+		return (false);
 	while (vars->numbers[counter + vars->offset])
 	{
 		if (counter > UINT_MAX)
