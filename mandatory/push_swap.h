@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 16:39:39 by cmenke            #+#    #+#             */
-/*   Updated: 2023/05/01 18:49:27 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/01 20:26:47 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 typedef struct s_stk
 {
 	int				number;
-	unsigned int	future_index;
+	long int		future_index;
 	struct s_stk	*next;
 }					t_stk;
 
@@ -34,19 +34,19 @@ typedef struct s_vars
 {
 	char			**numbers;
 	int				offset;
-	unsigned int	len_stk_a;
-	unsigned int	len_stk_b;
-	unsigned int	median;
-	unsigned int	amt_ra;
-	unsigned int	amt_rb;
-	unsigned int	amt_rra;
-	unsigned int	amt_rrb;
-	unsigned int	min_amt_ra;
-	unsigned int	min_amt_rb;
-	unsigned int	min_amt_rra;
-	unsigned int	min_amt_rrb;
-	unsigned int	max_stk_a;
-	unsigned int	min_stk_a;
+	long int		len_stk_a;
+	long int		len_stk_b;
+	long int		median;
+	long int		amt_ra;
+	long int		amt_rb;
+	long int		amt_rra;
+	long int		amt_rrb;
+	long int		min_amt_ra;
+	long int		min_amt_rb;
+	long int		min_amt_rra;
+	long int		min_amt_rrb;
+	long int		max_stk_a;
+	long int		min_stk_a;
 }					t_vars;
 
 //create_nodes_1
@@ -79,7 +79,12 @@ void	ft_rrr(t_stk **stk_a, t_stk **stk_b);
 void	ft_rra(t_stk **stk_a, bool print);
 void	ft_rrb(t_stk **stk_b, bool print);
 //read_input.c
+bool	ft_check_if_stk_a_is_unsorted(t_stk *stk_a);
 bool	ft_put_numbers_to_stk_a(t_vars *vars, t_stk **stk_a);
 bool	ft_split_input(t_vars *vars, char **argv, int argc);
+// sort_stack_a.c
+void	ft_sort_three_nums_stk_a(t_stk **stk_a);
+// assign_future_index.c
+void	ft_assign_future_index_from_sorted_stack(t_vars *vars, t_stk *stk_a);
 
 #endif

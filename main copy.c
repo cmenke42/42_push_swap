@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 18:52:48 by cmenke            #+#    #+#             */
-/*   Updated: 2023/05/01 20:39:12 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/01 20:35:53 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,6 @@ int	ft_error(int exit_code)
 	ft_putendl_fd("Error", 2);
 	return (exit_code);
 }
-
-//////
-/// check and parse the input -- START
-///////
-
-//////
-/// check and parse the input -- END
-///////
-
-//////
-/// sorting the numbers - START
-///////
-
-/// 3 numbers in stack a - START
-
-///3 numbers in stack a - END
 
 void	ft_reset_operation_counter(t_vars *vars)
 {
@@ -51,8 +35,10 @@ void	ft_save_min_op_counter(t_vars *vars)
 	vars->min_amt_rrb = vars->amt_rrb;
 }
 
-/// assigning future indexes - END
+/// assigning future indexes - START
 
+
+/// assigning future indexes - END
 void	ft_do_rotate_op(t_vars *vars, t_stk **stk_a, t_stk **stk_b)
 {
 	while (vars->min_amt_ra || vars->min_amt_rb)
@@ -99,11 +85,18 @@ void	ft_do_reverse_rotate_op(t_vars *vars, t_stk **stk_a, t_stk **stk_b)
 	}
 }
 
+void	ft_rotate_stacks(t_vars *vars, t_stk **stk_a, t_stk **stk_b)
+{
+	ft_do_rotate_op(vars, stk_a, stk_b);
+	ft_do_reverse_rotate_op(vars, stk_a, stk_b);
+}
+
+
 bool	ft_find_number_below_median(t_vars *vars, t_stk **stk_a)
 {
-	unsigned int	counter;
-	t_stk			*temp;
-	bool			result;
+	long int	counter;
+	t_stk		*temp;
+	bool		result;
 
 	result = false;
 	counter = 0;
@@ -123,8 +116,7 @@ bool	ft_find_number_below_median(t_vars *vars, t_stk **stk_a)
 	else
 		vars->amt_rra = vars->len_stk_a - counter;
 	ft_save_min_op_counter(vars);
-	ft_do_rotate_op(vars, stk_a, NULL);
-	ft_do_reverse_rotate_op(vars, stk_a, NULL);
+	ft_rotate_stacks(vars, stk_a, NULL);
 	return (result);
 }
 
@@ -136,7 +128,7 @@ void	ft_get_max_values_stk_a(t_vars *vars, t_stk *stk_a)
 
 void	ft_push_all_to_stk_b(t_vars *vars, t_stk **stk_a, t_stk **stk_b)
 {
-	bool			search;
+	bool	search;
 
 	search = true;
 	while (vars->len_stk_a > 3)
@@ -158,8 +150,8 @@ void	ft_push_all_to_stk_b(t_vars *vars, t_stk **stk_a, t_stk **stk_b)
 
 void	ft_calc_op_for_min_o_max(t_vars *vars, t_stk **stk_a)
 {
-	unsigned int	counter;
-	t_stk			*temp;
+	long int	counter;
+	t_stk		*temp;
 
 	counter = 0;
 	temp = *stk_a;
@@ -174,9 +166,9 @@ void	ft_calc_op_for_min_o_max(t_vars *vars, t_stk **stk_a)
 		vars->amt_rra = vars->len_stk_a - counter;
 }
 
-void	ft_find_spot_in_a(t_vars *vars, t_stk *stk_a, unsigned int index, t_stk **_a)
+void	ft_find_spot_in_a(t_vars *vars, t_stk *stk_a, long int index, t_stk **_a)
 {
-	unsigned int	counter;
+	long int	counter;
 
 	counter = 0;
 	if (index < vars->min_stk_a || index > vars->max_stk_a)
@@ -199,10 +191,11 @@ void	ft_find_spot_in_a(t_vars *vars, t_stk *stk_a, unsigned int index, t_stk **_
 	}
 }
 
-long int	ft_calc_movement_cost(t_vars *vars, unsigned int pos_in_b)
+long int	ft_calc_movement_cost(t_vars *vars, long int pos_in_b)
 {
 	long int	total;
 
+	ft_reset_operation_counter(vars);
 	if (pos_in_b < vars->len_stk_b - pos_in_b)
 		vars->amt_rb = pos_in_b;
 	else if (pos_in_b != 0)
@@ -211,10 +204,10 @@ long int	ft_calc_movement_cost(t_vars *vars, unsigned int pos_in_b)
 	return (total);
 }
 
-void	ft_finish_up_stk_a(t_vars *vars, t_stk **stk_a)
+void	ft_rotate_index_one_to_top_of_stk_a(t_vars *vars, t_stk **stk_a)
 {
-	unsigned int	counter;
-	t_stk			*temp;
+	long int	counter;
+	t_stk		*temp;
 
 	counter = 0;
 	temp = *stk_a;
@@ -229,28 +222,23 @@ void	ft_finish_up_stk_a(t_vars *vars, t_stk **stk_a)
 	else
 		vars->amt_rra = vars->len_stk_a - counter;
 	ft_save_min_op_counter(vars);
-	ft_do_rotate_op(vars, stk_a, NULL);
-	ft_do_reverse_rotate_op(vars, stk_a, NULL);
+	ft_rotate_stacks(vars, stk_a, NULL);
 }
 
 void	ft_sort_from_b_to_a(t_vars *vars, t_stk **stk_a, t_stk **stk_b)
 {
-	long int		move_cost;
-	long int		lowest_move_cost;
-	unsigned int	pos_in_b;
-	t_stk			*temp_b;
+	long int	move_cost;
+	long int	lowest_move_cost;
+	long int	pos_in_b;
+	t_stk		*temp_b;
 
 	while (vars->len_stk_b > 0)
 	{
-		// ft_print_stk_a_future(*stk_a, *stk_b);
 		temp_b = *stk_b;
 		pos_in_b = 0;
-		ft_find_spot_in_a(vars, *stk_a, temp_b->future_index, stk_a);
-		lowest_move_cost = ft_calc_movement_cost(vars, pos_in_b);
-		ft_save_min_op_counter(vars);
+		lowest_move_cost = UINT_MAX + 10;
 		while (temp_b)
 		{
-			ft_reset_operation_counter(vars);
 			ft_find_spot_in_a(vars, *stk_a, temp_b->future_index, stk_a);
 			move_cost = ft_calc_movement_cost(vars, pos_in_b);
 			if (move_cost < lowest_move_cost)
@@ -261,14 +249,9 @@ void	ft_sort_from_b_to_a(t_vars *vars, t_stk **stk_a, t_stk **stk_b)
 			pos_in_b++;
 			temp_b = temp_b->next;
 		}
-		ft_do_reverse_rotate_op(vars, stk_a, stk_b);
-		ft_do_rotate_op(vars, stk_a, stk_b);
+		ft_rotate_stacks(vars, stk_a, stk_b);
 		ft_pa(vars, stk_a, stk_b);
 	}
-	///check wich one is cheaper
-	// while ((*stk_a)->future_index != 1)
-	// 	ft_ra(stk_a, true);
-	ft_finish_up_stk_a(vars, stk_a);
 }
 
 int	main(int argc, char **argv)
@@ -301,8 +284,9 @@ int	main(int argc, char **argv)
 		ft_assign_future_index_from_sorted_stack(vars, stk_a);
 		ft_push_all_to_stk_b(vars, &stk_a, &stk_b);
 		ft_sort_from_b_to_a(vars, &stk_a, &stk_b);
+		ft_rotate_index_one_to_top_of_stk_a(vars, &stk_a);
 	}
-
+	ft_print_stk_a_future(stk_a, stk_b);
 	//make sure to free the nodes if a fial happens during allocation of the nodes
 	if (argc == 2)
 		free(vars->numbers);

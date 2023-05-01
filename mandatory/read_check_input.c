@@ -1,16 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_input.c                                       :+:      :+:    :+:   */
+/*   read_check_input.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:37:20 by cmenke            #+#    #+#             */
-/*   Updated: 2023/05/01 19:25:04 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/01 20:16:05 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+bool	ft_check_if_stk_a_is_unsorted(t_stk *stk_a)
+{
+	while (stk_a && stk_a->next)
+	{
+		if (stk_a->number > stk_a->next->number)
+			return (true);
+		stk_a = stk_a->next;
+	}
+	return (false);
+}
 
 bool	ft_add_num_to_stk_a_if_not_duplicate(t_stk **stk_a, long int num)
 {
