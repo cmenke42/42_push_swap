@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 18:52:48 by cmenke            #+#    #+#             */
-/*   Updated: 2023/05/01 21:09:37 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/01 21:13:51 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,6 @@ int	ft_error(int exit_code)
 {
 	ft_putendl_fd("Error", 2);
 	return (exit_code);
-}
-
-void	ft_reset_operation_counter(t_vars *vars)
-{
-	vars->amt_ra = 0;
-	vars->amt_rb = 0;
-	vars->amt_rra = 0;
-	vars->amt_rrb = 0;
-}
-
-void	ft_save_min_op_counter(t_vars *vars)
-{
-	vars->min_amt_ra = vars->amt_ra;
-	vars->min_amt_rb = vars->amt_rb;
-	vars->min_amt_rra = vars->amt_rra;
-	vars->min_amt_rrb = vars->amt_rrb;
 }
 
 bool	ft_find_number_below_median(t_vars *vars, t_stk **stk_a)

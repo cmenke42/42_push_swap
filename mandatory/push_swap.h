@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 16:39:39 by cmenke            #+#    #+#             */
-/*   Updated: 2023/05/01 21:06:53 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/01 21:14:10 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,8 @@ void	ft_sort_three_nums_stk_a(t_stk **stk_a);
 void	ft_assign_future_index_from_sorted_stack(t_vars *vars, t_stk *stk_a);
 // rotate_stacks.c
 void	ft_rotate_stacks(t_vars *vars, t_stk **stk_a, t_stk **stk_b);
+// operation_counter.c
+void	ft_reset_operation_counter(t_vars *vars);
+void	ft_save_min_op_counter(t_vars *vars);
 
 #endif
