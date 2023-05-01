@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 20:19:33 by cmenke            #+#    #+#             */
-/*   Updated: 2023/05/01 20:48:15 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/01 21:37:48 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static t_stk	*ft_find_next_closest_num(t_stk *stk_a, int min_num)
 	return (assign_index);
 }
 
-void	ft_assign_future_index_from_sorted_stack(t_vars *vars, t_stk *stk_a)
+void	ft_assign_future_index_from_sorted_stk(t_vars *vars, t_stk *stk_a)
 {
 	long int	index;
 	int			min_num;
