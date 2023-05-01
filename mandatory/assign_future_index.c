@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 20:19:33 by cmenke            #+#    #+#             */
-/*   Updated: 2023/05/01 20:46:53 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/01 20:48:15 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static t_stk	*ft_find_next_closest_num(t_stk *stk_a, int min_num)
 {
-	long int		min_diff;
-	long int		diff;
-	t_stk			*assign_index;
+	long int	min_diff;
+	long int	diff;
+	t_stk		*assign_index;
 
 	min_diff = (long int)UINT_MAX + 10;
 	while (stk_a)
@@ -40,7 +40,7 @@ void	ft_assign_future_index_from_sorted_stack(t_vars *vars, t_stk *stk_a)
 	long int	index;
 	int			min_num;
 	t_stk		*assign_index;
-	
+
 	index = 0;
 	min_num = INT_MIN;
 	while (index < vars->len_stk_a)
