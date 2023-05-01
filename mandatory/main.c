@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 18:52:48 by cmenke            #+#    #+#             */
-/*   Updated: 2023/05/01 22:30:00 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/01 23:16:12 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ bool	ft_create_and_check_stack_a(t_vars *vars, t_stk **stk_a)
 	counter = 0;
 	result = ft_put_numbers_to_stk_a(vars, stk_a);
 	if (result == false)
-		ft_clear_all_nodes(stk_a);	
+		ft_clear_all_nodes(stk_a);
 	if (vars->offset == 0)
 	{
 		while (vars->numbers[counter + vars->offset])

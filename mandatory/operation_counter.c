@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 21:13:25 by cmenke            #+#    #+#             */
-/*   Updated: 2023/05/01 21:42:00 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/01 23:12:08 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,15 @@ long int	ft_calc_movement_cost(t_vars *vars, long int pos_in_b)
 	return (total);
 }
 
-void	ft_calc_op_for_min_o_max(t_vars *vars, t_stk **stk_a)
+void	ft_calc_op_for_min_o_max(t_vars *vars, t_stk *stk_a)
 {
 	long int	counter;
-	t_stk		*temp;
 
 	counter = 0;
-	temp = *stk_a;
-	while (temp->future_index != vars->min_stk_a)
+	while (stk_a->future_index != vars->min_stk_a)
 	{
 		counter++;
-		temp = temp->next;
+		stk_a = stk_a->next;
 	}
 	ft_set_rotate_counter_for_stack_a(vars, counter);
 }

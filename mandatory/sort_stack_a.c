@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 20:16:35 by cmenke            #+#    #+#             */
-/*   Updated: 2023/05/01 21:40:20 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/01 23:15:33 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,23 +47,27 @@ void	ft_rotate_index_one_to_top_of_stk_a(t_vars *vars, t_stk **stk_a)
 	ft_rotate_stacks(vars, stk_a, NULL);
 }
 
-static void	ft_find_spot_in_a(t_vars *vars, t_stk *stk_a, long int index, t_stk **_a)
+static void	ft_find_spot_in_a(t_vars *vars, t_stk *stk_a, long int index)
 {
 	long int	counter;
+	t_stk		*start_stk_a;
 
 	counter = 0;
+	start_stk_a = stk_a;
 	ft_reset_operation_counter(vars);
 	if (index < vars->min_stk_a || index > vars->max_stk_a)
-		ft_calc_op_for_min_o_max(vars, _a);
-	else if (index < stk_a->future_index && index > ft_last_node(stk_a)->future_index)
+		ft_calc_op_for_min_o_max(vars, start_stk_a);
+	else if (index < stk_a->future_index
+		&& index > ft_last_node(stk_a)->future_index)
 		return ;
 	else
 	{
 		while (stk_a->next)
 		{	
 			counter++;
-			if (index > stk_a->future_index && index < stk_a->next->future_index)
-				break;
+			if (index > stk_a->future_index
+				&& index < stk_a->next->future_index)
+				break ;
 			stk_a = stk_a->next;
 		}
 		ft_set_rotate_counter_for_stack_a(vars, counter);
@@ -84,7 +88,7 @@ void	ft_sort_from_b_to_a(t_vars *vars, t_stk **stk_a, t_stk **stk_b)
 		lowest_move_cost = (long int)UINT_MAX + 10;
 		while (temp_b)
 		{
-			ft_find_spot_in_a(vars, *stk_a, temp_b->future_index, stk_a);
+			ft_find_spot_in_a(vars, *stk_a, temp_b->future_index);
 			move_cost = ft_calc_movement_cost(vars, pos_in_b);
 			if (move_cost < lowest_move_cost)
 			{

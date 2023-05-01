@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 22:03:39 by cmenke            #+#    #+#             */
-/*   Updated: 2023/04/29 22:07:50 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/01 23:15:43 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,3 @@ void	ft_rrb(t_stk **stk_b, bool print)
 	if (print == true)
 		ft_printf("rrb\n");
 }
-
-
