@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:37:20 by cmenke            #+#    #+#             */
-/*   Updated: 2023/05/01 20:16:05 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/01 22:28:22 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static bool	ft_check_num(char *number, long int *num)
 	int	j;
 
 	j = 0;
-	if (number[j] == '+' || number[j] == '-')
+	if ((number[j] == '+' || number[j] == '-') && number[j + 1] != '\0')
 		j++;
 	while (number[j])
 		if (ft_isdigit(number[j++]) == 0)

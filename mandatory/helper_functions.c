@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 22:04:12 by cmenke            #+#    #+#             */
-/*   Updated: 2023/04/30 16:02:31 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/01 22:18:08 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,6 @@
 
 void	ft_print_stk_a(t_stk *stk_a, t_stk *stk_b)
 {
-	t_stk	*last_a;
-	t_stk	*last_b;
-
-	last_a = stk_a;
-	last_b = stk_b;
 	while (stk_a != NULL || stk_b != NULL)
 	{
 		if (stk_a != NULL)
@@ -43,11 +38,6 @@ void	ft_print_stk_a(t_stk *stk_a, t_stk *stk_b)
 
 void	ft_print_stk_a_future(t_stk *stk_a, t_stk *stk_b)
 {
-	t_stk	*last_a;
-	t_stk	*last_b;
-
-	last_a = stk_a;
-	last_b = stk_b;
 	while (stk_a != NULL || stk_b != NULL)
 	{
 		if (stk_a != NULL)
