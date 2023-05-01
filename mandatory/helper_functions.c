@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 22:04:12 by cmenke            #+#    #+#             */
-/*   Updated: 2023/05/01 23:16:31 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/01 23:36:08 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_print_stk_a(t_stk *stk_a, t_stk *stk_b)
 	{
 		if (stk_a != NULL)
 		{
-			ft_printf("num:%d, fut:%d", stk_a->number, stk_a->future_index);
+			ft_printf("%d", stk_a->number);
 			stk_a = stk_a->next;
 		}
 		else
@@ -28,8 +28,8 @@ void	ft_print_stk_a(t_stk *stk_a, t_stk *stk_b)
 			ft_printf(" -- %d", stk_b->number);
 			stk_b = stk_b->next;
 		}
-		else
-			ft_printf(" -- #");
+		// else
+		// 	ft_printf(" -- #");
 		ft_printf("\n");
 	}
 	ft_printf("\n");
@@ -51,8 +51,8 @@ void	ft_print_stk_a_future(t_stk *stk_a, t_stk *stk_b)
 			ft_printf(" -- %d", stk_b->future_index);
 			stk_b = stk_b->next;
 		}
-		else
-			ft_printf(" -- #");
+		// else
+		// 	ft_printf(" -- #");
 		ft_printf("\n");
 	}
 	ft_printf("\n");

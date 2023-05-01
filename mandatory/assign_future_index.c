@@ -6,13 +6,13 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 20:19:33 by cmenke            #+#    #+#             */
-/*   Updated: 2023/05/01 21:37:48 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/02 00:09:42 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static t_stk	*ft_find_next_closest_num(t_stk *stk_a, int min_num)
+static t_stk	*ft_find_next_closest_num(t_stk *stk_a, long int min_num)
 {
 	long int	min_diff;
 	long int	diff;
@@ -22,7 +22,7 @@ static t_stk	*ft_find_next_closest_num(t_stk *stk_a, int min_num)
 	while (stk_a)
 	{
 		if (stk_a->future_index == 0)
-			diff = ((long int)min_num - stk_a->number) * -1;
+			diff = (min_num - stk_a->number) * -1;
 		if (stk_a->future_index == 0 && diff <= min_diff)
 		{
 			min_diff = diff;
@@ -38,11 +38,11 @@ static t_stk	*ft_find_next_closest_num(t_stk *stk_a, int min_num)
 void	ft_assign_future_index_from_sorted_stk(t_vars *vars, t_stk *stk_a)
 {
 	long int	index;
-	int			min_num;
+	long int	min_num;
 	t_stk		*assign_index;
 
 	index = 0;
-	min_num = INT_MIN;
+	min_num = (long int)INT_MIN - 10;
 	while (index < vars->len_stk_a)
 	{
 		assign_index = ft_find_next_closest_num(stk_a, min_num);
