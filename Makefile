@@ -6,7 +6,7 @@
 #    By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/08 21:07:24 by cmenke            #+#    #+#              #
-#    Updated: 2023/05/01 19:08:19 by cmenke           ###   ########.fr        #
+#    Updated: 2023/05/01 19:29:08 by cmenke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRCS := $(addprefix ${SRCDIR}/,main.c \
 							reverse_rotate.c \
 							rotate.c \
 							swap.c \
-							read_input.c)
+							read_check_input.c)
 
 # BSCRDIR := bonus
 
