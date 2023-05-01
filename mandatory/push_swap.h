@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 16:39:39 by cmenke            #+#    #+#             */
-/*   Updated: 2023/05/01 21:40:31 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/01 21:43:26 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@
 # include "../libft/libft.h"
 # include <limits.h>
 # include <stdbool.h>
-
-# define MALLOC_ERROR -1
-# define INPUT_ERROR -2
-# define SUCCESS 1
-# define LIST_TOO_SHORT -3
-# define OPERATION_FAILED -4
 
 typedef struct s_stk
 {
