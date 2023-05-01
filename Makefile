@@ -6,7 +6,7 @@
 #    By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/08 21:07:24 by cmenke            #+#    #+#              #
-#    Updated: 2023/05/01 20:19:27 by cmenke           ###   ########.fr        #
+#    Updated: 2023/05/01 21:06:59 by cmenke           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ SRCS := $(addprefix ${SRCDIR}/,main.c \
 							swap.c \
 							read_check_input.c \
 							sort_stack_a.c \
-							assign_future_index.c)
+							assign_future_index.c \
+							rotate_stacks.c)
 
 # BSCRDIR := bonus
 

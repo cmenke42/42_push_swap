@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 16:39:39 by cmenke            #+#    #+#             */
-/*   Updated: 2023/05/01 20:26:47 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/01 21:06:53 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,7 @@ bool	ft_split_input(t_vars *vars, char **argv, int argc);
 void	ft_sort_three_nums_stk_a(t_stk **stk_a);
 // assign_future_index.c
 void	ft_assign_future_index_from_sorted_stack(t_vars *vars, t_stk *stk_a);
+// rotate_stacks.c
+void	ft_rotate_stacks(t_vars *vars, t_stk **stk_a, t_stk **stk_b);
 
 #endif
