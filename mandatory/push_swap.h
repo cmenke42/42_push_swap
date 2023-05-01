@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 16:39:39 by cmenke            #+#    #+#             */
-/*   Updated: 2023/04/30 16:56:28 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/01 18:49:27 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_stk
 typedef struct s_vars
 {
 	char			**numbers;
-	unsigned int	start_pos;
+	int				offset;
 	unsigned int	len_stk_a;
 	unsigned int	len_stk_b;
 	unsigned int	median;
@@ -78,5 +78,8 @@ void	ft_rb(t_stk **stk_b, bool print);
 void	ft_rrr(t_stk **stk_a, t_stk **stk_b);
 void	ft_rra(t_stk **stk_a, bool print);
 void	ft_rrb(t_stk **stk_b, bool print);
+//read_input.c
+bool	ft_put_numbers_to_stk_a(t_vars *vars, t_stk **stk_a);
+bool	ft_split_input(t_vars *vars, char **argv, int argc);
 
 #endif
