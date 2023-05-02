@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_nodes_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 22:04:07 by cmenke            #+#    #+#             */
-/*   Updated: 2023/05/01 23:16:25 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/02 20:44:05 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,6 @@ t_stk	*ft_second_last_node(t_stk *lst)
 		tmp = tmp->next;
 	}
 	return (second_last);
-}
-
-//deletes content, frees the node and sets the start pointer (*lst) to NULL.
-//repeats for complete chain of nodes.
-//checks if del is not NULL.
-void	ft_clear_all_nodes(t_stk **lst)
-{
-	t_stk	*tmp;
-
-	tmp = *lst;
-	while (tmp != NULL)
-	{
-		*lst = tmp;
-		tmp = tmp->next;
-		free(*lst);
-	}
-	*lst = NULL;
 }
 
 //Counts the number of nodes in a list till next is NULL.

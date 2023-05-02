@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_all_nums_to_stack_b.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 21:21:05 by cmenke            #+#    #+#             */
-/*   Updated: 2023/05/01 21:31:21 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/02 21:00:21 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	ft_get_max_values_stk_a(t_vars *vars, t_stk *stk_a)
 {
-	vars->min_stk_a = stk_a->future_index;
-	vars->max_stk_a = stk_a->next->next->future_index;
+	vars->min_index_stk_a = stk_a->future_index;
+	vars->max_index_stk_a = stk_a->next->next->future_index;
 }
 
 static bool	ft_find_number_below_median(t_vars *vars, t_stk **stk_a)

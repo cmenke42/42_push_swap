@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_stack_a.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 20:16:35 by cmenke            #+#    #+#             */
-/*   Updated: 2023/05/02 00:05:13 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/02 21:18:43 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,13 @@ void	ft_rotate_index_one_to_top_of_stk_a(t_vars *vars, t_stk **stk_a)
 static void	ft_find_spot_in_a(t_vars *vars, t_stk *stk_a, long int index)
 {
 	long int	counter;
-	t_stk		*start_stk_a;
 
 	counter = 0;
-	start_stk_a = stk_a;
 	ft_reset_operation_counter(vars);
-	if (index < vars->min_stk_a || index > vars->max_stk_a)
-		ft_calc_op_for_min_o_max(vars, start_stk_a);
+	if (index < vars->min_index_stk_a || index > vars->max_index_stk_a)
+		ft_calc_op_for_min_o_max(vars, stk_a);
 	else if (index < stk_a->future_index
-		&& index > ft_last_node(stk_a)->future_index)
+		&& index > vars->last_node_stk_a->future_index)
 		return ;
 	else
 	{
@@ -76,7 +74,6 @@ static void	ft_find_spot_in_a(t_vars *vars, t_stk *stk_a, long int index)
 
 void	ft_sort_from_b_to_a(t_vars *vars, t_stk **stk_a, t_stk **stk_b)
 {
-	long int	move_cost;
 	long int	lowest_move_cost;
 	long int	pos_in_b;
 	t_stk		*temp_b;
@@ -86,15 +83,13 @@ void	ft_sort_from_b_to_a(t_vars *vars, t_stk **stk_a, t_stk **stk_b)
 		temp_b = *stk_b;
 		pos_in_b = 0;
 		lowest_move_cost = (long int)UINT_MAX + 10;
+		vars->last_node_stk_a = ft_last_node(*stk_a);
 		while (temp_b)
 		{
 			ft_find_spot_in_a(vars, *stk_a, temp_b->future_index);
-			move_cost = ft_calc_movement_cost(vars, pos_in_b);
-			if (move_cost < lowest_move_cost)
-			{
-				ft_save_min_op_counter(vars);
-				lowest_move_cost = move_cost;
-			}
+			ft_calc_moves(vars, pos_in_b, &lowest_move_cost);
+			if (lowest_move_cost == 1)
+				break ;
 			pos_in_b++;
 			temp_b = temp_b->next;
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operation_counter.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 21:13:25 by cmenke            #+#    #+#             */
-/*   Updated: 2023/05/01 23:12:08 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/02 21:16:59 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,20 @@ void	ft_set_rotate_counter_for_stack_a(t_vars *vars, long int counter)
 		vars->amt_rra = vars->len_stk_a - counter;
 }
 
-long int	ft_calc_movement_cost(t_vars *vars, long int pos_in_b)
+void	ft_calc_moves(t_vars *vars, long int pos_b, long int *lowest_move_cost)
 {
-	long int	total;
+	long int	move_cost;
 
-	if (pos_in_b < vars->len_stk_b - pos_in_b)
-		vars->amt_rb = pos_in_b;
-	else if (pos_in_b != 0)
-		vars->amt_rrb = vars->len_stk_b - pos_in_b;
-	total = vars->amt_ra + vars->amt_rb + vars->amt_rra + vars->amt_rrb;
-	return (total);
+	if (pos_b < vars->len_stk_b - pos_b)
+		vars->amt_rb = pos_b;
+	else if (pos_b != 0)
+		vars->amt_rrb = vars->len_stk_b - pos_b;
+	move_cost = vars->amt_ra + vars->amt_rb + vars->amt_rra + vars->amt_rrb;
+	if (move_cost < *lowest_move_cost)
+	{
+		ft_save_min_op_counter(vars);
+		*lowest_move_cost = move_cost;
+	}
 }
 
 void	ft_calc_op_for_min_o_max(t_vars *vars, t_stk *stk_a)
@@ -53,7 +57,7 @@ void	ft_calc_op_for_min_o_max(t_vars *vars, t_stk *stk_a)
 	long int	counter;
 
 	counter = 0;
-	while (stk_a->future_index != vars->min_stk_a)
+	while (stk_a->future_index != vars->min_index_stk_a)
 	{
 		counter++;
 		stk_a = stk_a->next;

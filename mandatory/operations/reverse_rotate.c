@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 22:03:39 by cmenke            #+#    #+#             */
-/*   Updated: 2023/05/01 23:15:43 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/02 20:51:34 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	ft_rrr(t_stk **stk_a, t_stk **stk_b)
 {

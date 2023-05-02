@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+         #
+#    By: user <user@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/08 21:07:24 by cmenke            #+#    #+#              #
-#    Updated: 2023/05/01 21:21:04 by cmenke           ###   ########.fr        #
+#    Updated: 2023/05/02 20:50:29 by user             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,32 +16,26 @@ NAME := push_swap
 
 SRCDIR := mandatory
 
-SRCS := $(addprefix ${SRCDIR}/,main.c \
-							create_nodes_1.c \
-							create_nodes_2.c \
-							helper_functions.c \
-							push.c \
+OPERATIONDIR := $(addprefix operations/,push.c \
 							reverse_rotate.c \
 							rotate.c \
-							swap.c \
+							swap.c)
+
+SRCS := $(addprefix ${SRCDIR}/,main.c \
+							create_and_modify_nodes.c \
+							get_info_about_list.c \
 							read_check_input.c \
 							sort_stack_a.c \
 							assign_future_index.c \
 							rotate_stacks.c \
 							operation_counter.c \
-							push_all_nums_to_stack_b.c)
+							push_all_nums_to_stack_b.c \
+							${OPERATIONDIR})
 
-# BSCRDIR := bonus
-
-# BSRCS := $(addprefix ${BSCRDIR}/,main_bonus.c)
 
 OBJS := ${SRCS:.c=.o}
 
-# BOBJS := ${BSRCS:.c=.o}
-
 HEADER := ${SRCDIR}/push_swap.h
-
-# BHEADER := ${BSCRDIR}/push_swap_bonus.h
 
 LIBFTDIR := libft
 
@@ -49,8 +43,7 @@ LIBFT := libft.a
 
 INCLUDE := ${LIBFTDIR}/${LIBFT}
 
-CFLAGS := -Wall -Wextra
-# CFLAGS := -Wall -Werror -Wextra
+CFLAGS := -Wall -Werror -Wextra
 
 CC := cc
 
@@ -69,20 +62,13 @@ ${OBJS}: ${HEADER}
 clean:
 	${RM} ${OBJS}
 	make clean -C ${LIBFTDIR}
-# ${RM} ${BOBJS}
 
 fclean: clean
 	${RM} ${NAME}
 	make fclean -C ${LIBFTDIR}
 
-# bonus: library ${BOBJS} ${LIBFTDIR}/${LIBFT}
-# 	${CC} ${CFLAGS} ${BOBJS} ${INCLUDE} -o ${NAME}
-
-# ${BOBJS}: ${BHEADER}
-
 re: fclean all
 
 .PHONY: all clean fclean re library
-# .PHONY: all clean fclean re library bonus
 
 .NOTPARALLEL:
