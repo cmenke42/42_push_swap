@@ -23,4 +23,4 @@ For each move it calculates the cheapest operation to minimize the total number 
 
 1. Compile the program using the provided Makefile.
 2. Run the program "push_swap" with a list of integers as arguments.
-3. The program will display the sorted instructions on the standard output.
+3. The program will display the instructions needed to sort the stack on the standard output.
