@@ -6,20 +6,20 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 18:52:48 by cmenke            #+#    #+#             */
-/*   Updated: 2023/05/02 00:10:12 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/03 15:51:52 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_error(int exit_code)
+static int	ft_error(int exit_code)
 {
 	if (exit_code != 0)
 		ft_putendl_fd("Error", 2);
 	return (exit_code);
 }
 
-bool	ft_create_and_check_stack_a(t_vars *vars, t_stk **stk_a)
+static bool	ft_create_and_check_stack_a(t_vars *vars, t_stk **stk_a)
 {
 	long int	counter;
 	bool		result;
@@ -37,7 +37,7 @@ bool	ft_create_and_check_stack_a(t_vars *vars, t_stk **stk_a)
 	return (result);
 }
 
-void	ft_sort_the_numbers(t_vars *vars, t_stk **stk_a, t_stk **stk_b)
+static void	ft_sort_the_numbers(t_vars *vars, t_stk **stk_a, t_stk **stk_b)
 {
 	vars->len_stk_a = ft_number_of_nodes(*stk_a);
 	if (vars->len_stk_a == 2)
@@ -72,9 +72,7 @@ int	main(int argc, char **argv)
 		exit_code = 1;
 	if (exit_code == 0 && ft_create_and_check_stack_a(vars, &stk_a) == false)
 		exit_code = 1;
-	if (exit_code == 0 && ft_check_if_stk_a_is_unsorted(stk_a) == false)
-		exit_code = 0;
-	else if (exit_code == 0)
+	if (exit_code == 0 && ft_check_if_stk_a_is_unsorted(stk_a) == true)
 		ft_sort_the_numbers(vars, &stk_a, &stk_b);
 	ft_clear_all_nodes(&stk_a);
 	free(vars);

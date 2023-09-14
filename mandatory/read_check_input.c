@@ -6,7 +6,7 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 18:37:20 by cmenke            #+#    #+#             */
-/*   Updated: 2023/05/02 00:37:00 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/03 16:12:01 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	ft_check_if_stk_a_is_unsorted(t_stk *stk_a)
 	return (false);
 }
 
-bool	ft_add_num_to_stk_a_if_not_duplicate(t_stk **stk_a, long int num)
+static bool	ft_add_num_to_stk_a_if_not_duplicate(t_stk **stk_a, long int num)
 {
 	t_stk	*temp;
 	t_stk	*new;
@@ -78,8 +78,6 @@ bool	ft_put_numbers_to_stk_a(t_vars *vars, t_stk **stk_a)
 		return (false);
 	while (vars->numbers[counter + vars->offset])
 	{
-		if (counter > UINT_MAX)
-			return (false);
 		if (ft_check_num(vars->numbers[counter + vars->offset], &num) == false)
 			return (false);
 		if (ft_add_num_to_stk_a_if_not_duplicate(stk_a, num) == false)

@@ -6,12 +6,14 @@
 /*   By: cmenke <cmenke@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 20:19:33 by cmenke            #+#    #+#             */
-/*   Updated: 2023/05/02 00:09:42 by cmenke           ###   ########.fr       */
+/*   Updated: 2023/05/03 15:48:12 by cmenke           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+//searches for the next number with no future index, which has the lowest
+//difference to the current min_num
 static t_stk	*ft_find_next_closest_num(t_stk *stk_a, long int min_num)
 {
 	long int	min_diff;
@@ -35,6 +37,8 @@ static t_stk	*ft_find_next_closest_num(t_stk *stk_a, long int min_num)
 	return (assign_index);
 }
 
+//loops through the stack to assign each node the future index which the number
+//would have in the sorted stack
 void	ft_assign_future_index_from_sorted_stk(t_vars *vars, t_stk *stk_a)
 {
 	long int	index;
